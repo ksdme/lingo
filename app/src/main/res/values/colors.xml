@@ -5,4 +5,5 @@
     <color name="colorAccent">#00838F</color>
 
     <color name="colorContent">#FAFAFA</color>
+    <color name="colorHorizontalRule">#F5F5F5</color>
 </resources>
