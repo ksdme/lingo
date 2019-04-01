@@ -5,4 +5,5 @@
     <dimen name="hr_height_two">1.5dp</dimen>
 
     <dimen name="body_padding">16dp</dimen>
+    <dimen name="body_main_inset_margin">24dp</dimen>
 </resources>

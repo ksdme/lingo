@@ -1,18 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:orientation="vertical"
         tools:showIn="@layout/activity_main"
         tools:context=".MainActivity">
 
     <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/zero">
+            android:layout_margin="@dimen/body_main_inset_margin">
+
+        <android.support.v7.widget.SwitchCompat
+                android:id="@+id/word"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/body_padding"
+                android:text="@string/sample_word"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/body_main_inset_margin"
+            android:layout_marginEnd="@dimen/body_main_inset_margin"
+            android:layout_marginBottom="@dimen/body_main_inset_margin">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -20,9 +40,14 @@
                 android:orientation="vertical">
 
             <include layout="@layout/element_word_list" />
+            <include layout="@layout/element_word_list" />
+            <include layout="@layout/element_word_list" />
+            <include layout="@layout/element_word_list" />
+            <include layout="@layout/element_word_list" />
+            <include layout="@layout/element_word_list" />
 
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
