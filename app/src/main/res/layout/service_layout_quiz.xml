@@ -41,6 +41,7 @@
         </RelativeLayout>
 
         <LinearLayout
+                android:id="@+id/word_usage_example"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -53,6 +54,7 @@
                     android:background="@color/colorAccent" />
 
             <TextView
+                    android:id="@+id/word_usage_example_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/spacing_size_two"
@@ -65,6 +67,7 @@
         </LinearLayout>
 
         <RadioGroup
+                android:id="@+id/question_answers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/spacing_size_three"
@@ -72,6 +75,7 @@
                 android:paddingBottom="@dimen/spacing_size_three">
 
             <RadioButton
+                    android:id="@+id/answer_a"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_size_two"
@@ -80,6 +84,7 @@
                     style="@style/Question.Answer" />
 
             <RadioButton
+                    android:id="@+id/answer_b"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_size_two"
@@ -88,6 +93,7 @@
                     style="@style/Question.Answer" />
 
             <RadioButton
+                    android:id="@+id/answer_c"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_size_two"
