@@ -21,4 +21,14 @@
         <item name="android:fontFamily">@font/karla_regular</item>
     </style>
 
+    <style name="Question.Answer" parent="Components.Text">
+        <item name="android:checked">false</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/karla_regular</item>
+        <item name="android:textColor">@color/color_option_text</item>
+        <item name="android:button">@android:color/transparent</item>
+        <item name="android:background">@drawable/bg_answer_option</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
 </resources>

@@ -14,6 +14,10 @@
     <dimen name="spacing_size_three">16dp</dimen>
     <dimen name="spacing_size_four">24dp</dimen>
 
+    <dimen name="corner_radius_one">1dp</dimen>
+    <dimen name="corner_radius_two">2dp</dimen>
+    <dimen name="corner_radius_three">2.5dp</dimen>
+
     <dimen name="body_padding">16dp</dimen>
     <dimen name="body_padding_half">8dp</dimen>
     <dimen name="body_main_inset_margin">24dp</dimen>
