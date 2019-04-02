@@ -9,17 +9,24 @@ import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import xyz.ksdme.lingo.knife.doesRequireOverlayAbility
+import xyz.ksdme.lingo.knife.requestOverlayAbility
+import xyz.ksdme.lingo.knife.safelyCheckIfHasOverlayAbility
 import xyz.ksdme.lingo.services.QuestionOverlayService
 
 class MainActivity : AppCompatActivity() {
     private val logTag = "MainActivity"
+    private val requestCodeOverlay = 9358
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        this.hooksInit()
+        if (safelyCheckIfHasOverlayAbility(this))
+            this.initOverlayStuff()
+        else if (doesRequireOverlayAbility())
+            requestOverlayAbility(this, this.requestCodeOverlay)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -34,7 +41,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun hooksInit() {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == this.requestCodeOverlay) {
+            if (safelyCheckIfHasOverlayAbility(this))
+                this.initOverlayStuff()
+        }
+    }
+
+    private fun initOverlayStuff() {
         made_with_love.setOnClickListener {
             Log.d(this.logTag, "launchService")
             this.launchService()
