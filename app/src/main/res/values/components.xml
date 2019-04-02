@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Components" />
+    <style name="Components.Text" parent="TextAppearance.AppCompat.Subhead" />
+    <style name="Components.Text.Large" parent="TextAppearance.AppCompat.Headline" />
+
+</resources>

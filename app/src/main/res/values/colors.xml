@@ -6,4 +6,6 @@
 
     <color name="colorContent">#FAFAFA</color>
     <color name="colorHorizontalRule">#F5F5F5</color>
+
+    <color name="colorTextHint">#46494C</color>
 </resources>
