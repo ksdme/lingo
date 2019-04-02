@@ -26,7 +26,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sample_word"
-                    style="@style/Components.Text.Large"/>
+                    style="@style/Question.Word"/>
 
             <TextView
                     android:id="@+id/word_class"
@@ -35,10 +35,9 @@
                     android:paddingLeft="@dimen/spacing_size_two"
                     android:paddingRight="@dimen/spacing_size_two"
                     android:text="@string/sample_word_class"
-                    android:textStyle="italic"
                     android:layout_alignBaseline="@+id/word_title"
                     android:layout_toEndOf="@+id/word_title"
-                    style="@style/Components.Text"/>
+                    style="@style/Question.Class"/>
 
         </RelativeLayout>
 
@@ -63,7 +62,7 @@
                     android:text="@string/sample_word_example"
                     android:textColor="@color/colorTextHint"
                     android:gravity="start"
-                    style="@style/Components.Text"/>
+                    style="@style/Question.Example"/>
 
         </LinearLayout>
 

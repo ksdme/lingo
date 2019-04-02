@@ -5,4 +5,20 @@
     <style name="Components.Text" parent="TextAppearance.AppCompat.Subhead" />
     <style name="Components.Text.Large" parent="TextAppearance.AppCompat.Headline" />
 
+    <!-- Specific Component Styles -->
+    <style name="Question" parent="Components.Text.Large" />
+
+    <style name="Question.Word" parent="Components.Text.Large">
+        <item name="android:fontFamily">@font/karla_bold</item>
+    </style>
+
+    <style name="Question.Class" parent="Components.Text">
+        <item name="android:fontFamily">@font/karla_italic</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="Question.Example" parent="Components.Text">
+        <item name="android:fontFamily">@font/karla_regular</item>
+    </style>
+
 </resources>
