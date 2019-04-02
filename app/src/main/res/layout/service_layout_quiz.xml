@@ -65,45 +65,38 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/spacing_size_three"
                 android:paddingEnd="@dimen/spacing_size_three"
-                android:paddingBottom="@dimen/spacing_size_three"
-                android:orientation="vertical">
+                android:paddingBottom="@dimen/spacing_size_three">
 
-            <RadioGroup
+            <RadioButton
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_size_two"
+                    android:layout_marginTop="@dimen/spacing_size_two"
+                    android:text="@string/sample_word_answer_a"
+                    style="@style/Question.Answer" />
 
-                <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/spacing_size_two"
-                        android:layout_marginTop="@dimen/spacing_size_two"
-                        android:text="@string/sample_word_answer_a"
-                        style="@style/Question.Answer" />
+            <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_size_two"
+                    android:layout_marginTop="@dimen/spacing_size_two"
+                    android:text="@string/sample_word_answer_b"
+                    style="@style/Question.Answer" />
 
-                <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/spacing_size_two"
-                        android:layout_marginTop="@dimen/spacing_size_two"
-                        android:text="@string/sample_word_answer_b"
-                        style="@style/Question.Answer" />
+            <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_size_two"
+                    android:layout_marginTop="@dimen/spacing_size_two"
+                    android:text="@string/sample_word_answer_c"
+                    style="@style/Question.Answer" />
 
-                <RadioButton
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/spacing_size_two"
-                        android:layout_marginTop="@dimen/spacing_size_two"
-                        android:text="@string/sample_word_answer_c"
-                        style="@style/Question.Answer" />
-
-            </RadioGroup>
-
-        </LinearLayout>
+        </RadioGroup>
 
     </LinearLayout>
 
