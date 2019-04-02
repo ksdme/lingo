@@ -44,8 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="@dimen/spacing_size_two"
-                android:paddingBottom="@dimen/spacing_size_two">
+                android:paddingTop="@dimen/spacing_size_two">
 
             <View
                     android:layout_width="@dimen/hr_height_three"
