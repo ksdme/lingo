@@ -9,7 +9,7 @@
             android:id="@+id/word"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/body_padding"
+            android:padding="@dimen/spacing_size_three"
             android:text="@string/sample_word"
             android:clickable="true"
             android:focusable="true"
@@ -19,8 +19,8 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="@dimen/hr_height_one"
-            android:layout_marginStart="@dimen/body_padding"
-            android:layout_marginEnd="@dimen/body_padding"
+            android:layout_marginStart="@dimen/spacing_size_three"
+            android:layout_marginEnd="@dimen/spacing_size_three"
             android:background="@color/colorHorizontalRule"/>
 
 </LinearLayout>

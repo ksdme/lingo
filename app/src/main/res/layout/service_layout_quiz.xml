@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/body_padding"
+        android:layout_margin="@dimen/spacing_size_three"
         android:orientation="vertical">
 
     <LinearLayout
@@ -12,41 +12,45 @@
             android:orientation="vertical">
 
 
-        <LinearLayout
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="@dimen/body_padding"
-                android:paddingLeft="@dimen/body_padding"
-                android:paddingRight="@dimen/body_padding"
-                android:gravity="start">
+                android:paddingTop="@dimen/spacing_size_three"
+                android:paddingLeft="@dimen/spacing_size_three"
+                android:paddingRight="@dimen/spacing_size_three"
+                android:gravity="start|center_vertical">
 
             <TextView
+                    android:id="@+id/word_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sample_word"
                     style="@style/Components.Text.Large"/>
 
             <TextView
+                    android:id="@+id/word_class"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
+                    android:paddingLeft="@dimen/spacing_size_two"
+                    android:paddingRight="@dimen/spacing_size_two"
                     android:text="@string/sample_word_class"
                     android:textStyle="italic"
+                    android:layout_alignBaseline="@+id/word_title"
+                    android:layout_toEndOf="@+id/word_title"
                     style="@style/Components.Text"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="8dp"
+                android:paddingTop="@dimen/spacing_size_two"
                 android:paddingBottom="@dimen/body_padding">
 
             <View
-                    android:layout_width="3dp"
+                    android:layout_width="@dimen/hr_height_three"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/body_padding"
                     android:background="@color/colorAccent" />
@@ -54,8 +58,8 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="@dimen/body_padding"
+                    android:paddingStart="@dimen/spacing_size_two"
+                    android:paddingEnd="@dimen/spacing_size_three"
                     android:text="@string/sample_word_example"
                     android:textColor="@color/colorTextHint"
                     android:gravity="start"
