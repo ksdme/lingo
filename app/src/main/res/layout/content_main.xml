@@ -51,6 +51,7 @@
     </android.support.v7.widget.CardView>
 
     <ImageView
+            android:id="@+id/made_with_love"
             android:layout_width="@dimen/spacing_size_four"
             android:layout_height="@dimen/spacing_size_four"
             android:layout_gravity="center"
