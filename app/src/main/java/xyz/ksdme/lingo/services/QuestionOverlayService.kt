@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
+import android.graphics.Typeface
 import android.os.IBinder
 import android.support.v4.content.res.ResourcesCompat
 import android.util.Log
@@ -17,8 +18,19 @@ import xyz.ksdme.lingo.knife.getOverlayType
 class QuestionOverlayService: Service() {
     private val logTag = "QuestionOverlayService"
 
+    private lateinit var fontKarlaRegular: Typeface
+    private lateinit var fontKarlaItalics: Typeface
+    private lateinit var fontKarlaBold: Typeface
+
     private lateinit var windowManager: WindowManager
     private lateinit var panel: View
+
+    private lateinit var word: TextView
+    private lateinit var wordClass: TextView
+    private lateinit var wordExample: TextView
+    private lateinit var answerOptionA: TextView
+    private lateinit var answerOptionB: TextView
+    private lateinit var answerOptionC: TextView
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -30,12 +42,9 @@ class QuestionOverlayService: Service() {
         this.windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         this.drawOverlay()
 
-        val word = this.panel.findViewById<TextView>(R.id.word_title)
-        val typeface = ResourcesCompat.getFont(this, R.font.karla_bold)
-
-        typeface?.apply {
-            applyTypefaceOnTextView(word, this)
-        }
+        this.getFonts()
+        this.inject(this.panel)
+        this.applyInitialMakeUp()
 
         Log.d(this.logTag, "onCreated Finished")
     }
@@ -68,6 +77,33 @@ class QuestionOverlayService: Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+    }
+
+    private fun getFonts() {
+        ResourcesCompat.getFont(this, R.font.karla_regular)?.let { this.fontKarlaRegular = it }
+        ResourcesCompat.getFont(this, R.font.karla_italic)?.let { this.fontKarlaItalics = it }
+        ResourcesCompat.getFont(this, R.font.karla_bold)?.let { this.fontKarlaBold = it }
+    }
+
+    private fun applyInitialMakeUp() {
+        this.fontKarlaRegular.let { typeface ->
+            applyTypefaceOnTextView(this.wordExample, typeface)
+            applyTypefaceOnTextView(this.answerOptionA, typeface)
+            applyTypefaceOnTextView(this.answerOptionB, typeface)
+            applyTypefaceOnTextView(this.answerOptionC, typeface)
+        }
+
+        applyTypefaceOnTextView(this.word, this.fontKarlaBold)
+        applyTypefaceOnTextView(this.wordClass, this.fontKarlaItalics)
+    }
+
+    private fun inject(view: View) {
+        this.word = view.findViewById(R.id.word_title)
+        this.wordClass = view.findViewById(R.id.word_class)
+        this.wordExample = view.findViewById(R.id.word_usage_example_text)
+        this.answerOptionA = view.findViewById(R.id.answer_a)
+        this.answerOptionB = view.findViewById(R.id.answer_b)
+        this.answerOptionC = view.findViewById(R.id.answer_c)
     }
 
 }
