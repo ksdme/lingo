@@ -8,4 +8,6 @@
     <color name="colorHorizontalRule">#F5F5F5</color>
 
     <color name="colorTextHint">#46494C</color>
+    <color name="colorOptionWrong">#F56476</color>
+    <color name="colorOptionCorrect">#1DE9b6</color>
 </resources>
