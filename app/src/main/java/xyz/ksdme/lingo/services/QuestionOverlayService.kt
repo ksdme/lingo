@@ -33,7 +33,7 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     private lateinit var windowManager: WindowManager
     private lateinit var panel: View
 
-    private lateinit var word: TextView
+    private lateinit var wordText: TextView
     private lateinit var wordClass: TextView
     private lateinit var wordExample: TextView
     private lateinit var answerOptionA: CheckBox
@@ -53,7 +53,7 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
 
         this.drawOverlay()
 
-        this.inject(this.panel)
+        this.bindStuff(this.panel)
         this.applyInitialMakeUp()
         this.hookOptionCheckBoxes()
 
@@ -96,6 +96,15 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
         ResourcesCompat.getFont(this, R.font.karla_bold)?.let { this.fontKarlaBold = it }
     }
 
+    private fun bindStuff(view: View) {
+        this.wordText = view.findViewById(R.id.word_title)
+        this.wordClass = view.findViewById(R.id.word_class)
+        this.wordExample = view.findViewById(R.id.word_usage_example_text)
+        this.answerOptionA = view.findViewById(R.id.answer_a)
+        this.answerOptionB = view.findViewById(R.id.answer_b)
+        this.answerOptionC = view.findViewById(R.id.answer_c)
+    }
+
     private fun applyInitialMakeUp() {
         this.fontKarlaRegular.let { typeface ->
             applyTypefaceOnTextView(this.wordExample, typeface)
@@ -104,17 +113,8 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
             applyTypefaceOnTextView(this.answerOptionC, typeface)
         }
 
-        applyTypefaceOnTextView(this.word, this.fontKarlaBold)
+        applyTypefaceOnTextView(this.wordText, this.fontKarlaBold)
         applyTypefaceOnTextView(this.wordClass, this.fontKarlaItalics)
-    }
-
-    private fun inject(view: View) {
-        this.word = view.findViewById(R.id.word_title)
-        this.wordClass = view.findViewById(R.id.word_class)
-        this.wordExample = view.findViewById(R.id.word_usage_example_text)
-        this.answerOptionA = view.findViewById(R.id.answer_a)
-        this.answerOptionB = view.findViewById(R.id.answer_b)
-        this.answerOptionC = view.findViewById(R.id.answer_c)
     }
 
     private fun hookOptionCheckBoxes() {
