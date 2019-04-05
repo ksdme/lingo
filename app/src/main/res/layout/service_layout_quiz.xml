@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_size_three"
@@ -76,16 +77,18 @@
                 android:paddingBottom="@dimen/spacing_size_three"
                 android:orientation="vertical">
 
-            <TextView
+            <CheckBox
                     android:id="@+id/answer_a"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_size_two"
                     android:layout_marginTop="@dimen/spacing_size_two"
                     android:text="@string/sample_word_answer_a"
+                    android:button="@android:color/transparent"
+                    android:textColor="@color/color_option_text"
                     style="@style/Question.Answer" />
 
-            <TextView
+            <CheckBox
                     android:id="@+id/answer_b"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,7 +97,7 @@
                     android:text="@string/sample_word_answer_b"
                     style="@style/Question.Answer" />
 
-            <TextView
+            <CheckBox
                     android:id="@+id/answer_c"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

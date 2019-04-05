@@ -28,6 +28,7 @@
         <item name="android:fontFamily">@font/karla_regular</item>
         <item name="android:textColor">@color/color_option_text</item>
         <item name="android:background">@drawable/bg_answer_option</item>
+        <item name="android:button">@android:color/transparent</item>
     </style>
 
 </resources>
