@@ -124,11 +124,13 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     }
 
     override fun onCheckedChanged(button: CompoundButton?, checked: Boolean) {
-        // Update text color based on checked state
-        button?.text = button?.let {
-            val state = intArrayOf((if (checked) 1 else -1) * android.R.attr.state_checked)
-            val newColor = this.answerTextColor.getColorForState(state, Color.BLACK)
-            makeTypefaceText(this.fontKarlaRegular, button.textSize.toInt(), newColor, button.text.toString())
+        if (button != null) {
+            // Update text color based on checked state
+            button.text = let {
+                val state = intArrayOf((if (checked) 1 else -1) * android.R.attr.state_checked)
+                val newColor = this.answerTextColor.getColorForState(state, Color.BLACK)
+                makeTypefaceText(this.fontKarlaRegular, button.textSize.toInt(), newColor, button.text.toString())
+            }
         }
     }
 
