@@ -26,9 +26,9 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     private lateinit var windowManager: WindowManager
     private lateinit var panel: View
 
-    private lateinit var wordText: StyledRemoteTextView
-    private lateinit var wordClass: StyledRemoteTextView
-    private lateinit var wordExample: StyledRemoteTextView
+    private lateinit var word: StyledRemoteTextView
+    private lateinit var klass: StyledRemoteTextView
+    private lateinit var example: StyledRemoteTextView
     private val options = arrayListOf<OptionCheckBox>()
 
     private val fakeCorrectAnswer = 1
@@ -81,9 +81,9 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     }
 
     private fun bindStuff(view: View) {
-        this.wordText = view.findViewById(R.id.word_title)
-        this.wordClass = view.findViewById(R.id.word_class)
-        this.wordExample = view.findViewById(R.id.word_usage_example_text)
+        this.word = view.findViewById(R.id.word_title)
+        this.klass = view.findViewById(R.id.word_class)
+        this.example = view.findViewById(R.id.word_usage_example_text)
 
         this.options.add(view.findViewById(R.id.answer_a))
         this.options.add(view.findViewById(R.id.answer_b))
@@ -92,8 +92,8 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
 
     private fun applyInitialMakeUp() {
         this.fontKarlaRegular.let { typeface ->
-            this.wordExample.setStyleTypeface(typeface)
-            this.wordExample.updateTextColor()
+            this.example.setStyleTypeface(typeface)
+            this.example.updateTextColor()
 
             this.options.map { option ->
                 option.setStyleTypeface(typeface)
@@ -101,11 +101,11 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
             }
         }
 
-        this.wordText.setStyleTypeface(this.fontKarlaBold)
-        this.wordText.updateTextColor()
+        this.word.setStyleTypeface(this.fontKarlaBold)
+        this.word.updateTextColor()
 
-        this.wordClass.setStyleTypeface(this.fontKarlaItalics)
-        this.wordClass.updateTextColor()
+        this.klass.setStyleTypeface(this.fontKarlaItalics)
+        this.klass.updateTextColor()
     }
 
     private fun hookOptionCheckBoxes() {
