@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/bg_option_checked" android:state_checked="true" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:drawable="@drawable/bg_option_correct" app:answer_correct="true" />
+    <item android:drawable="@drawable/bg_option_wrong" app:answer_wrong="true" />
     <item android:drawable="@drawable/bg_option_unchecked" />
 </selector>

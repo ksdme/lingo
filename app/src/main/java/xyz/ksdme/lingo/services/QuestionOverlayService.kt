@@ -3,8 +3,6 @@ package xyz.ksdme.lingo.services
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.graphics.PixelFormat
 import android.graphics.Typeface
 import android.os.IBinder
@@ -16,9 +14,9 @@ import android.widget.CompoundButton
 import android.widget.FrameLayout
 import android.widget.TextView
 import xyz.ksdme.lingo.R
+import xyz.ksdme.lingo.components.OptionCheckBox
 import xyz.ksdme.lingo.knife.applyTypefaceOnTextView
 import xyz.ksdme.lingo.knife.getOverlayType
-import xyz.ksdme.lingo.knife.makeTypefaceText
 
 class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener {
 
@@ -28,17 +26,17 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     private lateinit var fontKarlaItalics: Typeface
     private lateinit var fontKarlaBold: Typeface
 
-    private lateinit var answerTextColor: ColorStateList
-
     private lateinit var windowManager: WindowManager
     private lateinit var panel: View
 
     private lateinit var wordText: TextView
     private lateinit var wordClass: TextView
     private lateinit var wordExample: TextView
-    private lateinit var answerOptionA: CheckBox
-    private lateinit var answerOptionB: CheckBox
-    private lateinit var answerOptionC: CheckBox
+    private lateinit var answerOptionA: OptionCheckBox
+    private lateinit var answerOptionB: OptionCheckBox
+    private lateinit var answerOptionC: OptionCheckBox
+
+    private val rightAnswerIs = 2
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -48,7 +46,6 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
         super.onCreate()
 
         this.windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        this.answerTextColor = this.resources.getColorStateList(R.color.color_option_text)
         this.getFonts()
 
         this.drawOverlay()
@@ -107,6 +104,9 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
 
     private fun applyInitialMakeUp() {
         this.fontKarlaRegular.let { typeface ->
+            this.answerOptionA.setStyleTypeface(typeface)
+            this.answerOptionB.setStyleTypeface(typeface)
+            this.answerOptionC.setStyleTypeface(typeface)
             applyTypefaceOnTextView(this.wordExample, typeface)
             applyTypefaceOnTextView(this.answerOptionA, typeface)
             applyTypefaceOnTextView(this.answerOptionB, typeface)
@@ -123,15 +123,20 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
         this.answerOptionC.setOnCheckedChangeListener(this)
     }
 
-    override fun onCheckedChanged(button: CompoundButton?, checked: Boolean) {
-        if (button != null) {
-            // Update text color based on checked state
-            button.text = let {
-                val state = intArrayOf((if (checked) 1 else -1) * android.R.attr.state_checked)
-                val newColor = this.answerTextColor.getColorForState(state, Color.BLACK)
-                makeTypefaceText(this.fontKarlaRegular, button.textSize.toInt(), newColor, button.text.toString())
-            }
+    private fun resolveTagToCheckBox(tag: String): CheckBox? {
+        return when(tag) {
+            "1" -> this.answerOptionA
+            "2" -> this.answerOptionB
+            "3" -> this.answerOptionC
+            else -> null
         }
+    }
+
+    override fun onCheckedChanged(button: CompoundButton?, checked: Boolean) {
+        val option = button as OptionCheckBox
+
+        option.updateTextColor()
+        option.setOptionStatus(OptionCheckBox.Status.CORRECT)
     }
 
 }

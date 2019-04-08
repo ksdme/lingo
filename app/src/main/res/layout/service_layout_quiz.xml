@@ -77,8 +77,9 @@
                 android:paddingBottom="@dimen/spacing_size_three"
                 android:orientation="vertical">
 
-            <CheckBox
+            <xyz.ksdme.lingo.components.OptionCheckBox
                     android:id="@+id/answer_a"
+                    android:tag="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_size_two"
@@ -88,8 +89,9 @@
                     android:textColor="@color/color_option_text"
                     style="@style/Question.Answer" />
 
-            <CheckBox
+            <xyz.ksdme.lingo.components.OptionCheckBox
                     android:id="@+id/answer_b"
+                    android:tag="2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_size_two"
@@ -97,8 +99,9 @@
                     android:text="@string/sample_word_answer_b"
                     style="@style/Question.Answer" />
 
-            <CheckBox
+            <xyz.ksdme.lingo.components.OptionCheckBox
                     android:id="@+id/answer_c"
+                    android:tag="3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/spacing_size_two"
