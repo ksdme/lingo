@@ -7,7 +7,6 @@ import android.graphics.PixelFormat
 import android.graphics.Typeface
 import android.os.IBinder
 import android.support.v4.content.res.ResourcesCompat
-import android.util.Log
 import android.view.*
 import android.widget.CheckBox
 import android.widget.CompoundButton
@@ -35,8 +34,6 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     private lateinit var answerOptionB: OptionCheckBox
     private lateinit var answerOptionC: OptionCheckBox
 
-    private val rightAnswerIs = 2
-
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
@@ -52,13 +49,9 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
         this.bindStuff(this.panel)
         this.applyInitialMakeUp()
         this.hookOptionCheckBoxes()
-
-        Log.d(this.logTag, "onCreated Finished")
     }
 
     private fun drawOverlay() {
-        Log.d(this.logTag, "WindowType: ${getOverlayType()}")
-
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -80,10 +73,6 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
 
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         return inflater.inflate(R.layout.service_layout_quiz, frame)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
     private fun getFonts() {
