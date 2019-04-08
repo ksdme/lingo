@@ -22,14 +22,14 @@
                 android:paddingRight="@dimen/spacing_size_three"
                 android:gravity="start|center_vertical">
 
-            <TextView
+            <xyz.ksdme.lingo.knife.components.StyledRemoteTextView
                     android:id="@+id/word_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/sample_word"
                     style="@style/Question.Word"/>
 
-            <TextView
+            <xyz.ksdme.lingo.knife.components.StyledRemoteTextView
                     android:id="@+id/word_class"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                     android:layout_marginStart="@dimen/body_padding"
                     android:background="@color/colorAccent" />
 
-            <TextView
+            <xyz.ksdme.lingo.knife.components.StyledRemoteTextView
                     android:id="@+id/word_usage_example_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

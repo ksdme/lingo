@@ -12,10 +12,9 @@ import android.view.*
 import android.widget.CheckBox
 import android.widget.CompoundButton
 import android.widget.FrameLayout
-import android.widget.TextView
 import xyz.ksdme.lingo.R
 import xyz.ksdme.lingo.components.OptionCheckBox
-import xyz.ksdme.lingo.knife.applyTypefaceOnTextView
+import xyz.ksdme.lingo.knife.components.StyledRemoteTextView
 import xyz.ksdme.lingo.knife.getOverlayType
 
 class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener {
@@ -29,9 +28,9 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     private lateinit var windowManager: WindowManager
     private lateinit var panel: View
 
-    private lateinit var wordText: TextView
-    private lateinit var wordClass: TextView
-    private lateinit var wordExample: TextView
+    private lateinit var wordText: StyledRemoteTextView
+    private lateinit var wordClass: StyledRemoteTextView
+    private lateinit var wordExample: StyledRemoteTextView
     private lateinit var answerOptionA: OptionCheckBox
     private lateinit var answerOptionB: OptionCheckBox
     private lateinit var answerOptionC: OptionCheckBox
@@ -104,17 +103,24 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
 
     private fun applyInitialMakeUp() {
         this.fontKarlaRegular.let { typeface ->
+            this.wordExample.setStyleTypeface(typeface)
+            this.wordExample.updateTextColor()
+
             this.answerOptionA.setStyleTypeface(typeface)
+            this.answerOptionA.updateTextColor()
+
             this.answerOptionB.setStyleTypeface(typeface)
+            this.answerOptionB.updateTextColor()
+
             this.answerOptionC.setStyleTypeface(typeface)
-            applyTypefaceOnTextView(this.wordExample, typeface)
-            applyTypefaceOnTextView(this.answerOptionA, typeface)
-            applyTypefaceOnTextView(this.answerOptionB, typeface)
-            applyTypefaceOnTextView(this.answerOptionC, typeface)
+            this.answerOptionC.updateTextColor()
         }
 
-        applyTypefaceOnTextView(this.wordText, this.fontKarlaBold)
-        applyTypefaceOnTextView(this.wordClass, this.fontKarlaItalics)
+        this.wordText.setStyleTypeface(this.fontKarlaBold)
+        this.wordText.updateTextColor()
+
+        this.wordClass.setStyleTypeface(this.fontKarlaItalics)
+        this.wordClass.updateTextColor()
     }
 
     private fun hookOptionCheckBoxes() {
