@@ -1,8 +1,10 @@
 package xyz.ksdme.lingo.services
 
+import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.PixelFormat
 import android.graphics.Typeface
 import android.os.IBinder
@@ -14,8 +16,10 @@ import xyz.ksdme.lingo.R
 import xyz.ksdme.lingo.components.OptionCheckBox
 import xyz.ksdme.lingo.knife.components.StyledRemoteTextView
 import xyz.ksdme.lingo.knife.getOverlayType
+import kotlin.math.roundToInt
 
-class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener {
+class QuestionOverlayService: Service(),
+    CompoundButton.OnCheckedChangeListener, View.OnTouchListener {
 
     private val logTag = "QuestionOverlayService"
 
@@ -24,12 +28,16 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     private lateinit var fontKarlaBold: Typeface
 
     private lateinit var windowManager: WindowManager
+    private lateinit var params: WindowManager.LayoutParams
     private lateinit var panel: View
 
     private lateinit var word: StyledRemoteTextView
     private lateinit var klass: StyledRemoteTextView
     private lateinit var example: StyledRemoteTextView
     private val options = arrayListOf<OptionCheckBox>()
+
+    private var _panelInitialY = 0
+    private var _panelTouchInitialY = 0.0F
 
     private val fakeCorrectAnswer = 1
 
@@ -51,7 +59,7 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     }
 
     private fun drawOverlay() {
-        val params = WindowManager.LayoutParams(
+        this.params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
             getOverlayType(),
@@ -59,12 +67,14 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
             PixelFormat.TRANSPARENT
         )
 
-        params.gravity = Gravity.TOP.or(Gravity.START)
-        params.x = 0
-        params.y = 0
+        this.params.gravity = Gravity.TOP.or(Gravity.START)
+        this.params.x = 0
+        this.params.y = 0
 
         this.panel = layoutInflate()
-        this.windowManager.addView(panel, params)
+        this.panel.setOnTouchListener(this)
+
+        this.windowManager.addView(this.panel, this.params)
     }
 
     private fun layoutInflate(): View {
@@ -122,6 +132,38 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
 
         val right = this.options[this.fakeCorrectAnswer]
         right.setOptionStatus(OptionCheckBox.Status.CORRECT)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouch(view: View?, event: MotionEvent?): Boolean {
+        return when(event?.action) {
+            MotionEvent.ACTION_DOWN -> {
+                this._panelInitialY = this.params.y
+                this._panelTouchInitialY = event.rawY
+
+                true
+            }
+
+            MotionEvent.ACTION_MOVE -> {
+                val diffY = event.rawY - this._panelTouchInitialY
+                val y = this._panelInitialY + diffY.roundToInt()
+
+                if (view != null) {
+                    val heightMax = Resources.getSystem().displayMetrics.heightPixels - view.height
+
+                    if (y < 0 || y > heightMax) {
+                        return true
+                    }
+
+                    this.params.y = y
+                    this.windowManager.updateViewLayout(view, this.params)
+                }
+
+                true
+            }
+
+            else -> false
+        }
     }
 
 }
