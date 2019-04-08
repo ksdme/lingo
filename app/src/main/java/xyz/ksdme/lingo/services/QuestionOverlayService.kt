@@ -29,9 +29,7 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     private lateinit var wordText: StyledRemoteTextView
     private lateinit var wordClass: StyledRemoteTextView
     private lateinit var wordExample: StyledRemoteTextView
-    private lateinit var answerOptionA: OptionCheckBox
-    private lateinit var answerOptionB: OptionCheckBox
-    private lateinit var answerOptionC: OptionCheckBox
+    private val options = arrayListOf<OptionCheckBox>()
 
     private val fakeCorrectAnswer = 1
 
@@ -86,9 +84,10 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
         this.wordText = view.findViewById(R.id.word_title)
         this.wordClass = view.findViewById(R.id.word_class)
         this.wordExample = view.findViewById(R.id.word_usage_example_text)
-        this.answerOptionA = view.findViewById(R.id.answer_a)
-        this.answerOptionB = view.findViewById(R.id.answer_b)
-        this.answerOptionC = view.findViewById(R.id.answer_c)
+
+        this.options.add(view.findViewById(R.id.answer_a))
+        this.options.add(view.findViewById(R.id.answer_b))
+        this.options.add(view.findViewById(R.id.answer_c))
     }
 
     private fun applyInitialMakeUp() {
@@ -96,14 +95,10 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
             this.wordExample.setStyleTypeface(typeface)
             this.wordExample.updateTextColor()
 
-            this.answerOptionA.setStyleTypeface(typeface)
-            this.answerOptionA.updateTextColor()
-
-            this.answerOptionB.setStyleTypeface(typeface)
-            this.answerOptionB.updateTextColor()
-
-            this.answerOptionC.setStyleTypeface(typeface)
-            this.answerOptionC.updateTextColor()
+            this.options.map { option ->
+                option.setStyleTypeface(typeface)
+                option.updateTextColor()
+            }
         }
 
         this.wordText.setStyleTypeface(this.fontKarlaBold)
@@ -114,17 +109,8 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     }
 
     private fun hookOptionCheckBoxes() {
-        this.answerOptionA.setOnCheckedChangeListener(this)
-        this.answerOptionB.setOnCheckedChangeListener(this)
-        this.answerOptionC.setOnCheckedChangeListener(this)
-    }
-
-    private fun resolveTagToCheckBox(tag: String): OptionCheckBox? {
-        return when(tag) {
-            "1" -> this.answerOptionA
-            "2" -> this.answerOptionB
-            "3" -> this.answerOptionC
-            else -> null
+        this.options.map { option ->
+            option.setOnCheckedChangeListener(this)
         }
     }
 
@@ -134,8 +120,8 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
         option.updateTextColor()
         option.setOptionStatus(OptionCheckBox.Status.WRONG)
 
-        val right = this.resolveTagToCheckBox(this.fakeCorrectAnswer.toString())
-        right?.setOptionStatus(OptionCheckBox.Status.CORRECT)
+        val right = this.options[this.fakeCorrectAnswer]
+        right.setOptionStatus(OptionCheckBox.Status.CORRECT)
     }
 
 }
