@@ -132,6 +132,14 @@ class QuestionOverlayService: Service(),
 
         val right = this.options[this.fakeCorrectAnswer]
         right.setOptionStatus(OptionCheckBox.Status.CORRECT)
+
+        this.disableOptions()
+    }
+
+    private fun disableOptions() {
+        this.options.map { option ->
+            option.isEnabled = false
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
