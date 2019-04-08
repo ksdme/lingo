@@ -1,6 +1,8 @@
 <resources>
     <dimen name="zero">0dp</dimen>
 
+    <dimen name="panel_progress_height">3dp</dimen>
+
     <dimen name="hr_height_one">1dp</dimen>
     <dimen name="hr_height_two">1.5dp</dimen>
     <dimen name="hr_height_three">3dp</dimen>

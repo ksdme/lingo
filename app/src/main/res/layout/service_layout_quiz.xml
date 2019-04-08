@@ -4,7 +4,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_size_three"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:clipToPadding="true">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -106,6 +107,20 @@
                     style="@style/Question.Answer" />
 
         </LinearLayout>
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/panel_progress_height">
+
+            <ProgressBar
+                    android:id="@+id/dismiss_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:progress="60"
+                    style="?android:attr/progressBarStyleHorizontal" />
+
+        </FrameLayout>
 
     </LinearLayout>
 
