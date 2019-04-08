@@ -8,7 +8,6 @@ import android.graphics.Typeface
 import android.os.IBinder
 import android.support.v4.content.res.ResourcesCompat
 import android.view.*
-import android.widget.CheckBox
 import android.widget.CompoundButton
 import android.widget.FrameLayout
 import xyz.ksdme.lingo.R
@@ -33,6 +32,8 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
     private lateinit var answerOptionA: OptionCheckBox
     private lateinit var answerOptionB: OptionCheckBox
     private lateinit var answerOptionC: OptionCheckBox
+
+    private val fakeCorrectAnswer = 1
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -118,7 +119,7 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
         this.answerOptionC.setOnCheckedChangeListener(this)
     }
 
-    private fun resolveTagToCheckBox(tag: String): CheckBox? {
+    private fun resolveTagToCheckBox(tag: String): OptionCheckBox? {
         return when(tag) {
             "1" -> this.answerOptionA
             "2" -> this.answerOptionB
@@ -131,7 +132,10 @@ class QuestionOverlayService: Service(), CompoundButton.OnCheckedChangeListener 
         val option = button as OptionCheckBox
 
         option.updateTextColor()
-        option.setOptionStatus(OptionCheckBox.Status.CORRECT)
+        option.setOptionStatus(OptionCheckBox.Status.WRONG)
+
+        val right = this.resolveTagToCheckBox(this.fakeCorrectAnswer.toString())
+        right?.setOptionStatus(OptionCheckBox.Status.CORRECT)
     }
 
 }
