@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:orientation="vertical"
         tools:showIn="@layout/activity_main"
@@ -16,7 +16,7 @@
             android:layout_margin="@dimen/spacing_size_four">
 
         <android.support.v7.widget.SwitchCompat
-                android:id="@+id/word"
+                android:id="@+id/global_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_size_three"
@@ -34,19 +34,11 @@
             android:layout_marginEnd="@dimen/spacing_size_four"
             android:layout_marginBottom="@dimen/spacing_size_four">
 
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/words_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            <include layout="@layout/element_word_list" />
-            <include layout="@layout/element_word_list" />
-            <include layout="@layout/element_word_list" />
-            <include layout="@layout/element_word_list" />
-            <include layout="@layout/element_word_list" />
-            <include layout="@layout/element_word_list" />
-
-        </LinearLayout>
+                tools:listitem="@layout/element_word_list" />
 
     </android.support.v7.widget.CardView>
 
