@@ -126,12 +126,13 @@
                 android:layout_height="@dimen/panel_progress_height">
 
             <ProgressBar
-                    android:id="@+id/dismiss_duration"
+                    android:id="@+id/dismiss_progress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:progress="60"
+                    android:progress="0"
                     android:max="100"
+                    android:visibility="invisible"
                     style="?android:attr/progressBarStyleHorizontal" />
 
         </FrameLayout>

@@ -7,11 +7,14 @@ import android.content.Intent
 import android.content.res.Resources
 import android.graphics.PixelFormat
 import android.graphics.Typeface
+import android.os.CountDownTimer
 import android.os.IBinder
 import android.support.v4.content.res.ResourcesCompat
+import android.util.Log
 import android.view.*
 import android.widget.CompoundButton
 import android.widget.FrameLayout
+import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.service_layout_quiz.view.*
 import xyz.ksdme.lingo.R
 import xyz.ksdme.lingo.components.OptionCheckBox
@@ -35,7 +38,12 @@ class QuestionOverlayService: Service(),
     private lateinit var word: StyledRemoteTextView
     private lateinit var klass: StyledRemoteTextView
     private lateinit var example: StyledRemoteTextView
+    private lateinit var dismissAfter: ProgressBar
     private val options = arrayListOf<OptionCheckBox>()
+
+    private val dismissAfterMilliSeconds = 6000L
+    private val dismissUpdateEveryMilliSeconds = 10L
+    private var dismissCounterHandler: CountDownTimer? = null
 
     private var _panelInitialY = 0
     private var _panelTouchInitialY = 0.0F
@@ -99,6 +107,8 @@ class QuestionOverlayService: Service(),
         this.options.add(view.answer_a)
         this.options.add(view.answer_b)
         this.options.add(view.answer_c)
+
+        this.dismissAfter = view.dismiss_progress
     }
 
     private fun applyInitialMakeUp() {
@@ -135,6 +145,12 @@ class QuestionOverlayService: Service(),
         right.setOptionStatus(OptionCheckBox.Status.CORRECT)
 
         this.disableOptions()
+
+        this.handleCountDownToDismiss().let { handler ->
+            this.dismissAfter.visibility = View.VISIBLE
+            this.dismissCounterHandler = handler
+            handler.start()
+        }
     }
 
     private fun disableOptions() {
@@ -173,6 +189,30 @@ class QuestionOverlayService: Service(),
 
             else -> false
         }
+    }
+
+    private fun handleCountDownToDismiss(): CountDownTimer {
+        val self = this
+
+        return object: CountDownTimer(
+            this.dismissAfterMilliSeconds, this.dismissUpdateEveryMilliSeconds) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                val ratio = millisUntilFinished.toDouble() / self.dismissAfterMilliSeconds
+                self.dismissAfter.progress = (100 * ratio).toInt()
+            }
+
+            override fun onFinish() {
+                self.dismissAfter.visibility = View.INVISIBLE
+                self.stopSelf()
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        this.dismissCounterHandler?.cancel()
+        this.windowManager.removeView(this.panel)
     }
 
 }
