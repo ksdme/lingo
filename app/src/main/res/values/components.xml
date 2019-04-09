@@ -2,8 +2,14 @@
 <resources>
 
     <style name="Components" />
-    <style name="Components.Text" parent="TextAppearance.AppCompat.Subhead" />
-    <style name="Components.Text.Large" parent="TextAppearance.AppCompat.Headline" />
+
+    <style name="Components.Text" parent="TextAppearance.AppCompat.Subhead">
+        <item name="android:fontFamily">@font/karla_regular</item>
+    </style>
+
+    <style name="Components.Text.Large" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:fontFamily">@font/karla_regular</item>
+    </style>
 
     <!-- Specific Component Styles -->
     <style name="Question" parent="Components.Text.Large" />
@@ -19,13 +25,10 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
-    <style name="Question.Example" parent="Components.Text">
-        <item name="android:fontFamily">@font/karla_regular</item>
-    </style>
+    <style name="Question.Example" parent="Components.Text" />
 
     <style name="Question.Answer" parent="Components.Text">
         <item name="android:textAlignment">center</item>
-        <item name="android:fontFamily">@font/karla_regular</item>
         <item name="android:textColor">@color/color_option_text</item>
         <item name="android:background">@drawable/bg_answer_option</item>
         <item name="android:button">@android:color/transparent</item>

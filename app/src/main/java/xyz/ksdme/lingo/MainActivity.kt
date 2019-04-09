@@ -2,6 +2,7 @@ package xyz.ksdme.lingo
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
