@@ -47,7 +47,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_about -> true
+            R.id.action_about -> {
+                this.launchService()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -62,10 +65,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initOverlayStuff() {
-        made_with_love.setOnClickListener {
-            Log.d(this.logTag, "launchService")
-            this.launchService()
-        }
+        Log.d(this.logTag, "initOverlayStuff")
     }
 
     private fun launchService() {
