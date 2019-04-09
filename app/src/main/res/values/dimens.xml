@@ -23,4 +23,7 @@
     <dimen name="body_padding">16dp</dimen>
     <dimen name="body_padding_half">8dp</dimen>
     <dimen name="body_main_inset_margin">24dp</dimen>
+
+    <dimen name="circular_progress_drawable_height_one">3dp</dimen>
+    <dimen name="circular_progress_height_one">16dp</dimen>
 </resources>

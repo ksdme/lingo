@@ -40,6 +40,19 @@
                     android:layout_toEndOf="@+id/word_title"
                     style="@style/Question.Class"/>
 
+            <ProgressBar
+                    android:layout_width="@dimen/circular_progress_height_one"
+                    android:layout_height="@dimen/circular_progress_height_one"
+                    android:indeterminate="false"
+                    android:progress="25"
+                    android:max="100"
+                    android:background="@drawable/bg_circular_progress"
+                    android:progressDrawable="@drawable/circular_progress_bar"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@id/word_title"
+                    android:layout_alignBottom="@id/word_title"
+                    style="?android:attr/progressBarStyleHorizontal"/>
+
         </RelativeLayout>
 
         <LinearLayout
@@ -118,6 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:progress="60"
+                    android:max="100"
                     style="?android:attr/progressBarStyleHorizontal" />
 
         </FrameLayout>
