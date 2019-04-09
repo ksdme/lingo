@@ -12,6 +12,7 @@ import android.support.v4.content.res.ResourcesCompat
 import android.view.*
 import android.widget.CompoundButton
 import android.widget.FrameLayout
+import kotlinx.android.synthetic.main.service_layout_quiz.view.*
 import xyz.ksdme.lingo.R
 import xyz.ksdme.lingo.components.OptionCheckBox
 import xyz.ksdme.lingo.knife.components.StyledRemoteTextView
@@ -91,13 +92,13 @@ class QuestionOverlayService: Service(),
     }
 
     private fun bindStuff(view: View) {
-        this.word = view.findViewById(R.id.word_title)
-        this.klass = view.findViewById(R.id.word_class)
-        this.example = view.findViewById(R.id.word_usage_example_text)
+        this.word = view.word_title
+        this.klass = view.word_class
+        this.example = view.word_usage_example_text
 
-        this.options.add(view.findViewById(R.id.answer_a))
-        this.options.add(view.findViewById(R.id.answer_b))
-        this.options.add(view.findViewById(R.id.answer_c))
+        this.options.add(view.answer_a)
+        this.options.add(view.answer_b)
+        this.options.add(view.answer_c)
     }
 
     private fun applyInitialMakeUp() {
