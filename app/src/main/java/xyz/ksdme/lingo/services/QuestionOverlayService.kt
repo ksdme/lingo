@@ -34,11 +34,6 @@ class QuestionOverlayService: Service(),
     private lateinit var windowManager: WindowManager
     private lateinit var params: WindowManager.LayoutParams
     private lateinit var panel: View
-
-    private lateinit var word: StyledRemoteTextView
-    private lateinit var klass: StyledRemoteTextView
-    private lateinit var example: StyledRemoteTextView
-    private lateinit var dismissAfter: ProgressBar
     private val options = arrayListOf<OptionCheckBox>()
 
     private val dismissAfterMilliSeconds = 6000L
@@ -100,21 +95,15 @@ class QuestionOverlayService: Service(),
     }
 
     private fun bindStuff(view: View) {
-        this.word = view.word_title
-        this.klass = view.word_class
-        this.example = view.word_usage_example_text
-
         this.options.add(view.answer_a)
         this.options.add(view.answer_b)
         this.options.add(view.answer_c)
-
-        this.dismissAfter = view.dismiss_progress
     }
 
     private fun applyInitialMakeUp() {
         this.fontKarlaRegular.let { typeface ->
-            this.example.setStyleTypeface(typeface)
-            this.example.updateTextColor()
+            this.panel.word_usage_example_text.setStyleTypeface(typeface)
+            this.panel.word_usage_example_text.updateTextColor()
 
             this.options.map { option ->
                 option.setStyleTypeface(typeface)
@@ -122,11 +111,11 @@ class QuestionOverlayService: Service(),
             }
         }
 
-        this.word.setStyleTypeface(this.fontKarlaBold)
-        this.word.updateTextColor()
+        this.panel.word_title.setStyleTypeface(this.fontKarlaBold)
+        this.panel.word_title.updateTextColor()
 
-        this.klass.setStyleTypeface(this.fontKarlaItalics)
-        this.klass.updateTextColor()
+        this.panel.word_class.setStyleTypeface(this.fontKarlaItalics)
+        this.panel.word_class.updateTextColor()
     }
 
     private fun hookOptionCheckBoxes() {
@@ -147,7 +136,7 @@ class QuestionOverlayService: Service(),
         this.disableOptions()
 
         this.handleCountDownToDismiss().let { handler ->
-            this.dismissAfter.visibility = View.VISIBLE
+            this.panel.dismiss_progress.visibility = View.VISIBLE
             this.dismissCounterHandler = handler
             handler.start()
         }
@@ -199,11 +188,11 @@ class QuestionOverlayService: Service(),
 
             override fun onTick(millisUntilFinished: Long) {
                 val ratio = millisUntilFinished.toDouble() / self.dismissAfterMilliSeconds
-                self.dismissAfter.progress = (100 * ratio).toInt()
+                self.panel.dismiss_progress.progress = (100 * ratio).toInt()
             }
 
             override fun onFinish() {
-                self.dismissAfter.visibility = View.INVISIBLE
+                self.panel.dismiss_progress.visibility = View.INVISIBLE
                 self.stopSelf()
             }
         }
