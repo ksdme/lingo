@@ -62,6 +62,12 @@ class QuestionOverlayService: Service(),
         this.hookOptionCheckBoxes()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        this.dismissCounterHandler?.cancel()
+        this.windowManager.removeView(this.panel)
+    }
+
     private fun drawOverlay() {
         this.params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
@@ -196,12 +202,6 @@ class QuestionOverlayService: Service(),
                 self.stopSelf()
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        this.dismissCounterHandler?.cancel()
-        this.windowManager.removeView(this.panel)
     }
 
 }
